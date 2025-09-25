@@ -4,6 +4,7 @@ import 'core/supabase_config.dart';
 import 'pages/login_page.dart';
 import 'pages/register_page.dart';
 import 'pages/home_page.dart';
+import 'pages/add_record_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,12 +29,20 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // 👇 ya no usamos const en HomePage
+
       home: session != null ? HomePage() : const LoginPage(),
       getPages: [
         GetPage(name: '/login', page: () => const LoginPage()),
         GetPage(name: '/register', page: () => const RegisterPage()),
         GetPage(name: '/home', page: () => HomePage()),
+        GetPage(
+          name: '/add',
+          page: () {
+            final session = SupabaseConfig.client.auth.currentSession;
+            final userId = session?.user.id ?? '';
+            return AddRecordPage(userId: userId);
+          },
+        ),
       ],
     );
   }

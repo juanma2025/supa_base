@@ -6,7 +6,7 @@ import 'package:uuid/uuid.dart';
 class AddRecordPage extends StatefulWidget {
   final String userId;
 
-  const AddRecordPage({super.key, required this.userId});
+    const AddRecordPage({Key? key, required this.userId}) : super(key: key);
 
   @override
   State<AddRecordPage> createState() => _AddRecordPageState();
